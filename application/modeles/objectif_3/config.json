@@ -1,0 +1,14 @@
+{
+  "model_name": "M1_YOLO_3classes",
+  "model_type": "yolo",
+  "model_file": "model.pt",
+  "conf": 0.85,
+  "imgsz": 640,
+  "frcnn_min_size": 720,
+  "frcnn_max_size": 1280,
+  "class_names": [
+    "animal",
+    "cone",
+    "autre"
+  ]
+}

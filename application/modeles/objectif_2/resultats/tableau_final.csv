@@ -1,0 +1,6 @@
+,Accuracy,F1_macro,F1_freiner,Paramètres entraînables,Temps moyen / pli
+Repère (classe majoritaire),0.467 ± 0.046,0.212 ± 0.014,0.000 ± 0.000,-,-
+A. CNN scratch,0.367 ± 0.095,0.304 ± 0.111,0.174 ± 0.161,0.30 M,44 s
+B. ResNet18 scratch,0.500 ± 0.083,0.432 ± 0.144,0.462 ± 0.265,11.19 M,45 s
+C. ResNet18 fine-tuning,0.683 ± 0.091,0.633 ± 0.123,0.393 ± 0.245,11.19 M,22 s
+D. ResNet18 tête seule,0.617 ± 0.139,0.567 ± 0.160,0.367 ± 0.247,0.01 M,27 s

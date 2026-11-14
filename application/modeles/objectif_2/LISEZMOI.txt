@@ -1,0 +1,10 @@
+L'objectif 2 (robustesse des décisions de conduite aux conditions météo) est intégré à
+l'application principale.
+
+Déposez ici `model.pt` (poids ResNet18). Le fichier `config.json` versionné décrit les
+dimensions d'entrée, les classes et les résultats de validation croisée. Les poids sont
+ignorés par Git comme les autres modèles lourds.
+
+L'ancienne application autonome et ses résultats sont conservés dans le dossier local `deploy/`
+et `resultats/` lorsqu'ils sont présents ; ils ne sont pas nécessaires pour lancer l'application
+principale.

@@ -1,0 +1,12 @@
+{
+  "H": 224,
+  "W": 384,
+  "CLASS_NAMES": [
+    "éviter à gauche",
+    "éviter à droite",
+    "freiner"
+  ],
+  "modele": "ResNet18 pré-entraîné + météo",
+  "acc_beau_temps": "0.650",
+  "acc_mauvais_temps": "0.640"
+}

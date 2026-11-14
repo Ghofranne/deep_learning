@@ -1,0 +1,7 @@
+Modèle de l'objectif 3 : détection, comptage et catégorisation des obstacles par YOLO.
+
+- `config.json` décrit le modèle M1_YOLO_3classes, ses classes et le seuil utilisé.
+- `model.pt` contient les poids entraînés. Il est ignoré par Git ; pour le partager, utiliser une
+  Release GitHub ou le fournir séparément.
+
+Le paquet `ultralytics` est installé via `application/requirements.txt`.

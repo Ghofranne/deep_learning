@@ -1,0 +1,9 @@
+flask
+markdown
+onnxruntime
+opencv-python
+numpy
+torch
+torchvision
+ultralytics
+# Chaque membre ajoute ici les bibliothèques dont son objectif a besoin (ex. torch, ultralytics…)

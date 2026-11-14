@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{# Page standard d'un objectif : image -> predire(image, modele) -> image résultat + texte #}
+{% block contenu %}
+<div class="grille">
+  <div class="col-gauche">
+    {% include "_entree.html" %}
+    {% if obj.numero == 3 %}
+    <div class="carte">
+      <h3 class="carte-titre">Test de robustesse</h3>
+      <label class="champ-meteo" for="perturbation">Condition dégradée à simuler</label>
+      <select id="perturbation" class="select-meteo">
+        <option value="aucune">Aucune (image d'origine)</option>
+        <option value="faible luminosité">Faible luminosité</option>
+        <option value="brouillard">Brouillard</option>
+        <option value="flou de mouvement">Flou de mouvement</option>
+        <option value="bruit gaussien">Bruit gaussien</option>
+        <option value="pluie simulée">Pluie simulée</option>
+      </select>
+      <div class="reglage">
+        <div class="reglage-haut">
+          <label for="niveau-perturbation">Niveau de sévérité</label>
+          <output id="niveau-perturbation-val">1/5</output>
+        </div>
+        <input id="niveau-perturbation" type="range" min="1" max="5" step="1" value="1">
+        <small>Dégradations synthétiques définies dans le notebook. Elles ne remplacent pas des images météo réelles.</small>
+      </div>
+    </div>
+    <div class="carte">
+      <h3 class="carte-titre">Explicabilité</h3>
+      <label class="champ-meteo" for="explication">Carte d'activation à calculer</label>
+      <select id="explication" class="select-meteo">
+        <option value="aucune">Aucune (analyse plus rapide)</option>
+        <option value="eigencam">EigenCAM</option>
+        <option value="gradcam">Grad-CAM</option>
+        <option value="les_deux">EigenCAM et Grad-CAM</option>
+      </select>
+      <small class="aide-champ">Les cartes sont indicatives. Grad-CAM nécessite un calcul supplémentaire des gradients.</small>
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-droite">
+    <div class="carte">
+      <h3 class="carte-titre">{{ obj.info.libelle_resultat or "Résultat" }}</h3>
+      {% if obj.numero == 3 %}
+      <div id="comparaison-robustesse" class="images-objectif3" hidden>
+        <figure id="figure-reference" hidden>
+          <div class="cadre-image"><img id="img-reference" alt="Détection sur l'image d'origine" hidden></div>
+          <figcaption>Image d'origine</figcaption>
+        </figure>
+        <figure>
+          <div class="cadre-image"><img id="img-resultat" alt="Détection sur l'image analysée" hidden></div>
+          <figcaption id="legende-resultat">Image analysée</figcaption>
+        </figure>
+      </div>
+      <div id="images-explicabilite" class="images-objectif3" hidden>
+        <figure id="figure-eigencam" hidden>
+          <div class="cadre-image"><img id="img-eigencam" alt="Carte EigenCAM" hidden></div>
+          <figcaption>EigenCAM</figcaption>
+        </figure>
+        <figure id="figure-gradcam" hidden>
+          <div class="cadre-image"><img id="img-gradcam" alt="Carte Grad-CAM" hidden></div>
+          <figcaption>Grad-CAM</figcaption>
+        </figure>
+      </div>
+      {% else %}
+      <div class="cadre-image">
+        <div class="vide-image">Le résultat s'affichera ici.</div>
+        <img id="img-resultat" alt="Résultat" hidden>
+      </div>
+      {% endif %}
+      <div id="texte-resultat" class="texte-resultat">
+        <p class="discret">Déposez une image ou choisissez un exemple, puis cliquez sur « Analyser ».</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='commun.js') }}"></script>
+<script src="{{ url_for('static', filename='generique.js') }}"></script>
+{% endblock %}

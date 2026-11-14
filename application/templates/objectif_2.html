@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block contenu %}
+<div class="grille">
+  <div class="col-gauche">
+    {% include "_entree.html" %}
+
+    <div class="carte">
+      <h3 class="carte-titre">Conditions météo</h3>
+      <label class="champ-meteo" for="meteo">Météo à simuler</label>
+      <select id="meteo" class="select-meteo">
+        <option value="aucune">Aucune (image d'origine)</option>
+        <option value="brouillard">Brouillard</option>
+        <option value="pluie">Pluie</option>
+        <option value="nuit">Nuit</option>
+        <option value="soleil">Soleil rasant</option>
+        <option value="flou de vitesse">Flou de vitesse</option>
+        <option value="neige">Neige (non vue à l'entraînement)</option>
+      </select>
+      <div class="reglage">
+        <div class="reglage-haut">
+          <label for="intensite">Intensité</label>
+          <output id="intensite-val">0,8</output>
+        </div>
+        <input id="intensite" type="range" min="0.2" max="1" step="0.1" value="0.8">
+        <small>Modifiez la météo puis relancez l'analyse pour comparer la décision.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-droite">
+    <div id="resume" class="resume vide">
+      Déposez une photo ou choisissez un exemple, puis cliquez sur « Analyser ».
+    </div>
+    <div id="resultat" hidden>
+      <div class="carte decision-carte">
+        <div>
+          <span class="decision-libelle">Décision sous la météo choisie</span>
+          <h3 id="decision-meteo" class="decision-principale"></h3>
+        </div>
+        <p id="comparaison-decision" class="comparaison-decision"></p>
+        <p class="decision-origine">Par beau temps : <strong id="decision-beau"></strong></p>
+      </div>
+
+      <div class="carte images-objectif2">
+        <h3 class="carte-titre">Images analysées</h3>
+        <div class="images-conduite">
+          <figure>
+            <div class="cadre-image">
+              <img id="img-original" alt="Photo d'origine" hidden>
+            </div>
+            <figcaption>Photo d'origine</figcaption>
+          </figure>
+          <figure>
+            <div class="cadre-image">
+              <img id="img-meteo" alt="Photo avec météo simulée" hidden>
+            </div>
+            <figcaption id="legende-meteo">Photo avec météo simulée</figcaption>
+          </figure>
+          <figure>
+            <div class="cadre-image">
+              <img id="img-gradcam" alt="Carte Grad-CAM" hidden>
+            </div>
+            <figcaption>Grad-CAM : zones ayant contribué à la décision</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="grille probabilites-grille">
+        <div class="carte">
+          <h3 class="carte-titre">Probabilités · beau temps</h3>
+          <div id="probabilites-beau" class="liste-probabilites"></div>
+        </div>
+        <div class="carte">
+          <h3 class="carte-titre">Probabilités · météo choisie</h3>
+          <div id="probabilites-meteo" class="liste-probabilites"></div>
+        </div>
+      </div>
+      <p id="temps-analyse" class="temps-analyse"></p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='commun.js') }}"></script>
+<script src="{{ url_for('static', filename='objectif_2.js') }}"></script>
+{% endblock %}
